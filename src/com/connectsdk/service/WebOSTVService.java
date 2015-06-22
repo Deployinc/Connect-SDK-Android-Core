@@ -385,9 +385,13 @@ public class WebOSTVService extends DeviceService implements Launcher, MediaCont
 
         @Override
         public void onFailWithError(final ServiceCommandError error) {
-            socket.setListener(null);
-            socket.disconnect();
-            socket = null;
+            if (socket == null) {
+                Log.w("Connect SDK", "Socket is null! Skipping...");
+            } else {
+                socket.setListener(null);
+                socket.disconnect();
+                socket = null;
+            }
 
             Util.runOnUI(new Runnable() {
 
@@ -406,9 +410,13 @@ public class WebOSTVService extends DeviceService implements Launcher, MediaCont
 
         @Override
         public void onCloseWithError(final ServiceCommandError error) {
-            socket.setListener(null);
-            socket.disconnect();
-            socket = null;
+            if (socket == null) {
+                Log.w("Connect SDK", "Socket is null! Skipping...");
+            } else {
+                socket.setListener(null);
+                socket.disconnect();
+                socket = null;
+            }
 
             Util.runOnUI(new Runnable() {
 
@@ -2083,7 +2091,7 @@ public class WebOSTVService extends DeviceService implements Launcher, MediaCont
         return CapabilityPriorityLevel.HIGH;
     }
 
-    private void sendSpecialKey(final String key, final ResponseListener<Object> listener) {
+    public void sendSpecialKey(final String key, final ResponseListener<Object> listener) {
         if (mouseSocket != null) {
             mouseSocket.button(key);
             Util.postSuccess(listener, null);

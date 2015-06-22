@@ -2183,7 +2183,7 @@ public class NetcastTVService extends DeviceService implements Launcher, MediaCo
         }
     }
     
-    private void sendVirtualKeyCode(final int keycode, final ResponseListener<Object> listener) {
+    public void sendVirtualKeyCode(final int keycode, final ResponseListener<Object> listener) {
         ResponseListener<Object> responseListener = new ResponseListener<Object>() {
 
             @Override
